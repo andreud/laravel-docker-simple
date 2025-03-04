@@ -16,6 +16,5 @@
 	npm install && npm run build
 	composer run dev
 
-
-	The [pcntl] extension is required to run Pail.
-
+	chown 1000:1000 * -R
+	chmod 777 storage -R
