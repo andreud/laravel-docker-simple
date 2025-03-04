@@ -1,0 +1,35 @@
+name: 'myapp'
+
+services:
+
+  nginx:
+    image: 'nginx:alpine'
+#   working_dir: /application #
+    volumes:
+#     - '../application:/application' #
+      - './containers/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+    ports:
+      - '8888:80'
+
+  php-fpm:
+    build: ./containers/php-fpm
+#   working_dir: /application
+#   working_dir overrides the container's working directory which is specified by the image, for example Dockerfile's WORKDIR.
+    volumes:
+      - '../application:/var/www/html/application'
+#      - './containers/php-fpm/php-volume/:/var/www/html/'
+#      - './containers/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini'
+#      - './containers/php-fpm/install-laravel.sh:/install-laravel.sh'
+    
+  mysql:
+    image: 'mysql:8.0'
+    volumes:
+      - './containers/mysql/mysql-volume/:/var/lib/mysql'
+    ports:
+      - '32004:3306' # El primero se usa para conexión desde afuera de docker
+    #env_file: './docker/.env'
+    environment:
+      - MYSQL_ROOT_PASSWORD=myapp_mysql_root_pass
+      - MYSQL_DATABASE=myapp_db
+      - MYSQL_USER=myapp_dba
+      - MYSQL_PASSWORD=myapp_dba_pass
