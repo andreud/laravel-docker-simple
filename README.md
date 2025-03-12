@@ -4,6 +4,7 @@
 
 # Install with new Laravel instance: 
 
+In php-fpm controller 
 	cd application
 
 	laravel new laravel
@@ -18,3 +19,8 @@
 
 	chown 1000:1000 * -R
 	chmod 777 storage -R
+	chmod 777 database/database.sqlite 
+
+	In nginx container 
+	nginx -t
+	nginx -s reaload
