@@ -1,3 +1,17 @@
+# To-Do
+
+- Improve public dir location mapping form ngix and php-fpm for scurity
+- Fix "nvm i" not found on php-fpm Dockerfile
+- Add back override php.ini 
+- Addd .env for docker
+- Fix file permissions for laravel dir editing on host
+    - original ownership after installing using laravel isntaller:
+        root:root, -rw-r--r--
+- Fix initial file permissions: 
+    - file_put_contents(/var/www/html/laravel/storage/framework/...): 
+        Failed to open stream: Permission denied
+
+
 ## Troubleshooting
 
 List php.ini files:
