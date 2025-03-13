@@ -4,9 +4,8 @@ services:
 
   nginx:
     image: 'nginx:alpine'
-    # working_dir: /application #
     volumes:
-      - '..:/var/www/html' # To serve static files
+      - '..:/var/www/html' # To serve static files, change to: - './public:/var/www/html'?
       - './containers/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
     ports:
       - '8888:80'
