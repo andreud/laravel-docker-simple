@@ -1,19 +1,3 @@
-
-## Dockerfile para  PHP
-
-### Camino 1:
-partiendo de la imagen "php:8.4-fpm",
-instala zip os pack con apt,
-instala composer con COPY --from=composer/composer,,
-instala el lrvl installer con composer globalmente (problem: no queda en el path)
-(problem 2: no puedo instalr nano para editar configs, dice not found)
-
-### Camino 2:
-partiendo de una imagen de ubuntu base,
-Instalando PHP, Compoiser y Lrlv installer con 
-script que sugiere en la doc de Lrlv: (https://php.new/install/linux/8.4)
-
-
 ## Troubleshooting
 
 List php.ini files:
@@ -22,3 +6,22 @@ List php.ini files:
 Show where composer installs global packages
     $ composer global config --list | grep home
 
+## Artisan clear commands
+
+    php artisan cache:clear
+    php artisan config:clear
+    php artisan config:cache
+    php artisan route:clear
+    php artisan view:clear
+
+This command clears multiple caches in one go:
+
+    php artisan optimize:clear
+
+It runs: cache:clear, config:clear, route:clear, view:clear
+
+If you also want to recompile and cache configurations and routes after clearing, you can run:
+
+    php artisan optimize
+
+This will: Cache routes (route:cache), Cache config (config:cache), Cache views (view:cache)

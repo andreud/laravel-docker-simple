@@ -2,12 +2,11 @@ FROM php:8.4-fpm
 
 # Install system dependencies (unzip)
 RUN apt-get update && apt-get install -y unzip nano 
-
-# Install PHP zip extensions, parece que no es necesario, pero deberia habilitar la extension zip
-#RUN docker-php-ext-install zip
-
-# The [pcntl] extension is required to run Pail.
+# Install/enable PHP extensions
 RUN docker-php-ext-configure pcntl --enable-pcntl && docker-php-ext-install pcntl
+# pcntl extension required to run Pail.
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+#RUN docker-php-ext-install zip
 
 # Install Node/NVM
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
@@ -19,5 +18,3 @@ COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
 # Install Laravel installer
 RUN composer global require laravel/installer
-
-# WORKDIR "/application"
