@@ -10,19 +10,17 @@ Run/create containers
 
 	$ docker compose up
 
-# Run containers
-
-	$ docker compose up
-
 ## Install with new Laravel instance: 
 
-	# In php-fpm controller 
-	cd application
+	# In php-fpm container
+	nvm i 22 
+	cd /var/www/html
 	laravel new laravel
-	# (if "laravel" command not in path)
+	# If "laravel" command not in path:
 	/root/.composer/vendor/laravel/installer/bin/laravel new laravel
+	
+	# In needed:
 	cd laravel
-	nvm i 22
 	npm install && npm run build
 	composer run dev
 
@@ -36,16 +34,29 @@ if you change the new 'laravel' by another name, you should also change it in:
 	chmod 777 storage -R
 	chmod 777 database/database.sqlite 
 
-
 # Envs
 
-SESSION_DRIVER=file
+This one alone seems to fix 419 on posts 
+	SESSION_DRIVER=file
+	Other related in 2config/session.php" no needed
+		'same_site' => env('SESSION_SAME_SITE', null)
+		'http_only' => env('SESSION_HTTP_ONLY', false)
+		'secure' => env('SESSION_SECURE_COOKIE', false)
 
-config/session.php
 
-	'same_site' => env('SESSION_SAME_SITE', null)
-	'http_only' => env('SESSION_HTTP_ONLY', false)
-	'secure' => env('SESSION_SECURE_COOKIE', false)
+# Database
+
+Use mysql container:
+	#DB_CONNECTION=sqlite
+	DB_CONNECTION=mysql
+	DB_HOST=lar-simp-dok-mysql-1
+	DB_PORT=3306
+	DB_DATABASE=myapp_db
+	DB_USERNAME=root
+	DB_PASSWORD=myapp_mysql_root_pass
+
+Migrate:
+	php artisan:migrate
 
 ## Refresh
 
