@@ -1,3 +1,19 @@
+
+Spin up a a dead simple laravel dev environment using docker.
+
+# File Structure
+
+```
+- docker
+	- containers
+		- nginx
+		- php-fpm
+		- mysql
+	- docker-compose.yml
+- laravel
+	- (...your laravel app...)
+```
+
 # Usage
 
 Edit docker/docker-compose.yml:

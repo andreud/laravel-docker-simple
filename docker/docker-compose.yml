@@ -5,7 +5,7 @@ services:
   nginx:
     image: 'nginx:alpine'
     volumes:
-      - '..:/var/www/html' # To serve static files, change to: - './public:/var/www/html'?
+      - '../laravel/public:/var/www/html/laravel/public' # To serve static files
       - './containers/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
     ports:
       - '8888:80'
@@ -13,8 +13,8 @@ services:
   php-fpm:
     build: ./containers/php-fpm
     volumes:
-      - '..:/var/www/html'
-#      - './containers/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini'
+      - '../laravel:/var/www/html/laravel'
+      - './containers/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/host-99-overrides.ini'
     
   mysql:
     image: 'mysql:8.0'
