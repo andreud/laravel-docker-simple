@@ -1,4 +1,4 @@
-# Laravel Docker Simple dev env
+# Laravel Docker simple dev environment
 
 Spin up a a dead simple laravel dev environment using docker.
 
@@ -6,7 +6,7 @@ Spin up a a dead simple laravel dev environment using docker.
 
 ```
 📁 laravel
-	- (your laravel app)
+  - (your laravel app)
 📁 docker
   📘 docker-compose.yml
   📄 .env
@@ -16,21 +16,32 @@ Spin up a a dead simple laravel dev environment using docker.
     📁 mysql
 ```
 
+You can edit your laravel files and the nignx/php config files
+from your host machine.
+
+The mysql data is also persisted to the host machine via a volume.
+
 ## Usage
 
-Edit docker/docker-compose.yml:
+1. Download this repo, or clone it and delete `.git` directory
+
+2. Edit `docker/docker-compose.yml`:
 	
-	name: 'myapp'
-	services ports,
-	mysql service settings
+	- `name: 'myapp'`
+	- services ports, mysql service settings
 
-Run/create containers
+3. Run/create containers: 
+	
+	cd docker
+	docker compose up
 
-	$ docker compose up
+### Install new Laravel instance
 
-### Install with new Laravel instance: 
-
-	# In php-fpm container
+	# In php-fpm container:
+	docker exec -it <your-app-name>-fpm-1 bash	
+	# Or
+	docker debug <your-app-name>-fpm-1
+	
 	nvm i 22 
 	cd /var/www/html
 	laravel new laravel
@@ -46,25 +57,27 @@ if you change the new 'laravel' by another name, you should also change it in:
 	- /docker/containers/nginx/nginx.conf
 	- /.gitignore
 
-### File permissions
+#### File permissions
 
 	chown 1000:1000 * -R # Parece no ser necesario
 	chmod 777 storage -R
+	
+	# If using sqlite:
 	chmod 777 database/database.sqlite 
 
-## Env vars
+### Env vars
 
-This one alone seems to fix 419 on posts 
+Fix 419 on posts:
 	
 	SESSION_DRIVER=file
 
-Other related in 2config/session.php" no needed
+Optional. Other related in "config/session.php"
 	'same_site' => env('SESSION_SAME_SITE', null)
 	'http_only' => env('SESSION_HTTP_ONLY', false)
 	'secure' => env('SESSION_SECURE_COOKIE', false)
 
 
-### Database
+#### Database
 
 Use mysql container:
 
