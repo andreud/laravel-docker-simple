@@ -1,20 +1,22 @@
+# Laravel Docker Simple dev env
 
 Spin up a a dead simple laravel dev environment using docker.
 
-# File Structure
+## File Structure
 
 ```
-- docker
-	- containers
-		- nginx
-		- php-fpm
-		- mysql
-	- docker-compose.yml
-- laravel
-	- (...your laravel app...)
+📁 docker
+	📘 docker-compose.yml
+	📄 .env
+	📁 containers
+		📁 nginx
+		📁 php-fpm
+		📁 mysql
+📁 laravel
+	- (your laravel app)
 ```
 
-# Usage
+## Usage
 
 Edit docker/docker-compose.yml:
 	
@@ -26,7 +28,7 @@ Run/create containers
 
 	$ docker compose up
 
-## Install with new Laravel instance: 
+### Install with new Laravel instance: 
 
 	# In php-fpm container
 	nvm i 22 
@@ -35,7 +37,7 @@ Run/create containers
 	# If "laravel" command not in path:
 	/root/.composer/vendor/laravel/installer/bin/laravel new laravel
 	
-	# In needed:
+	# If needed:
 	cd laravel
 	npm install && npm run build
 	composer run dev
@@ -44,25 +46,28 @@ if you change the new 'laravel' by another name, you should also change it in:
 	- /docker/containers/nginx/nginx.conf
 	- /.gitignore
 
-## File permissions
+### File permissions
 
 	chown 1000:1000 * -R # Parece no ser necesario
 	chmod 777 storage -R
 	chmod 777 database/database.sqlite 
 
-# Envs
+## Env vars
 
 This one alone seems to fix 419 on posts 
+	
 	SESSION_DRIVER=file
-	Other related in 2config/session.php" no needed
-		'same_site' => env('SESSION_SAME_SITE', null)
-		'http_only' => env('SESSION_HTTP_ONLY', false)
-		'secure' => env('SESSION_SECURE_COOKIE', false)
+
+Other related in 2config/session.php" no needed
+	'same_site' => env('SESSION_SAME_SITE', null)
+	'http_only' => env('SESSION_HTTP_ONLY', false)
+	'secure' => env('SESSION_SECURE_COOKIE', false)
 
 
-# Database
+### Database
 
 Use mysql container:
+
 	#DB_CONNECTION=sqlite
 	DB_CONNECTION=mysql
 	DB_HOST=lar-simp-dok-mysql-1
@@ -72,18 +77,16 @@ Use mysql container:
 	DB_PASSWORD=myapp_mysql_root_pass
 
 Migrate:
+
 	php artisan:migrate
 
-## Refresh
+## Refresh laravel configs
 
 	php artisan optimize:clear
 	php artisan optimize
 	npm run build
 
 ## Reload nginx container config
-
-
-proxy_set_header X-CSRF-TOKEN $http_x_csrf_token; ??
 
 	nginx -t
 	nginx -s reload
