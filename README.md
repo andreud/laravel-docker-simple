@@ -5,15 +5,15 @@ Spin up a a dead simple laravel dev environment using docker.
 ## File Structure
 
 ```
-📁 docker
-	📘 docker-compose.yml
-	📄 .env
-	📁 containers
-		📁 nginx
-		📁 php-fpm
-		📁 mysql
 📁 laravel
 	- (your laravel app)
+📁 docker
+  📘 docker-compose.yml
+  📄 .env
+  📁 containers
+    📁 nginx
+    📁 php-fpm
+    📁 mysql
 ```
 
 ## Usage
