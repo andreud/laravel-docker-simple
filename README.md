@@ -42,7 +42,6 @@ The mysql data is also persisted to the host machine via a volume.
 	# Or
 	docker debug <your-app-name>-fpm-1
 	
-	nvm i 22 
 	cd /var/www/html
 	laravel new laravel
 	# If "laravel" command not in path:
