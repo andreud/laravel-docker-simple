@@ -106,7 +106,7 @@ Migrate:
 # Containers diagrams
 
 The containers, ports, volumes and how they interact in these two scenacios:
-- With the Vite development server 
-- With the built application for production or testing
+- With the Vite development server for Hot Module Reloading `npm run dev` or `npm run dev -- --host`
+- With the built application for production or testing `npm run build`
 
 ![Containers Diagram](docs/containers-diagram.png)
