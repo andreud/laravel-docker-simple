@@ -105,4 +105,8 @@ Migrate:
 
 # Containers diagrams
 
+The containers, ports, volumes and how they interact in these two scenacios:
+- With the Vite development server 
+- With the built application for production or testing
+
 ![Containers Diagram](docs/containers-diagram.png)
