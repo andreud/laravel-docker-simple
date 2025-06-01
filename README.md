@@ -102,3 +102,7 @@ Migrate:
 
 	nginx -t
 	nginx -s reload
+
+# Containers diagrams
+
+![Containers Diagram](docs/containers-diagram.png)
