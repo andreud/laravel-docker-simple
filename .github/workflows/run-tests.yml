@@ -1,10 +1,12 @@
 name: Laravel Tests
 
+# Change "main-tests" to "main" or your prefered brancgh after  
+# you have added the laravel files to the "/laravel" dir
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main-tests" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main-tests" ]
 
 jobs:
   laravel-tests:
